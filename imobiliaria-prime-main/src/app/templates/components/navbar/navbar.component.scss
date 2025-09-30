@@ -1,0 +1,74 @@
+@use 'src/styles.scss' as *;
+
+.navbar {
+  background: linear-gradient(135deg, #006400, #2ecc71); // degradê verde esmeralda
+  padding: 0; // padding vertical removido
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  .container {
+    display: flex;
+    align-items: center;           // alinha verticalmente
+    justify-content: space-between; // logo à esquerda, nav à direita
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.8rem 1.5rem;
+  }
+
+  .logo-text {
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  .navbar-nav {
+    display: flex;
+    flex-direction: row;
+    gap: 1.2rem;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  .nav-link {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    white-space: nowrap;
+
+    &:hover,
+    &.active {
+      color: #fff;
+      background-color: rgba(255, 255, 255, 0.2); // leve contraste no hover
+    }
+  }
+
+  .sair-link {
+    color: #ff6b6b !important;
+    font-weight: 600;
+    &:hover {
+      color: #ff4757 !important;
+      background: none;
+    }
+  }
+
+  // ---------------- Responsividade ----------------
+  @media (max-width: 768px) {
+    .navbar-nav {
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-link {
+      padding: 0.4rem 0.8rem;
+    }
+  }
+}

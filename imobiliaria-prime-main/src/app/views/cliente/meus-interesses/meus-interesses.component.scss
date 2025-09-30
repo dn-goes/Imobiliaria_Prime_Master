@@ -1,0 +1,87 @@
+@import 'src/styles.scss';
+
+.pagina-meus-interesses {
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  // ---------------- Cabeçalho ----------------
+  .cabecalho {
+    text-align: center;
+    margin-bottom: 2.5rem;
+
+    h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: $cor-secundaria;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: #666;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto; // centraliza o texto
+      line-height: 1.5;
+    }
+  }
+
+  // ---------------- Lista de interesses ----------------
+  .lista-interesses {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    justify-content: center;
+    padding: 0 1rem;
+  }
+
+  // ---------------- Mensagem vazia ----------------
+  .mensagem-vazia {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #777;
+    font-size: 1.2rem;
+    background: #f0f8f5; // leve tom verde claro para suavizar
+    border-radius: 12px;
+    margin: 1rem auto 0;
+    max-width: 600px;
+    font-weight: 500;
+  }
+
+  // ---------------- Erro ----------------
+  .erro {
+    text-align: center;
+    padding: 2rem;
+    color: #e74c3c;
+    font-weight: 600;
+    background: #fff0f0; // tom mais suave de vermelho
+    border-radius: 12px;
+    margin: 1rem auto 0;
+    max-width: 600px;
+  }
+
+  // ---------------- Carregando ----------------
+  .carregando {
+    text-align: center;
+    padding: 3rem;
+    font-size: 1.2rem;
+    color: $cor-primaria;
+    font-weight: 600;
+  }
+}
+
+// ---------------- Responsivo ----------------
+@media (max-width: 576px) {
+  .pagina-meus-interesses {
+    padding: 1.5rem 0.5rem;
+
+    .cabecalho h2 {
+      font-size: 1.8rem;
+    }
+
+    .lista-interesses {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+}
