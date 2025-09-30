@@ -1,128 +1,103 @@
-# 🏠 Imobiliária Prime Master
+🏠 Imobiliária Prime Master
 
-> Uma plataforma Angular para gestão de imóveis com autenticação por perfil (cliente e corretor).
+Plataforma SPA Angular para gestão de imóveis, com autenticação baseada em perfil (cliente e corretor) e CRUD completo para corretores.
 
-Este projeto demonstra os principais conceitos do **Angular** — como componentes, serviços, roteamento com guardas, comunicação com API via `HttpClient`, e arquitetura baseada em perfis — aplicados a um cenário real: uma imobiliária digital.
+🎯 Objetivo
 
----
+Desenvolver uma Single Page Application (SPA) que permita:
 
-## 🎯 Objetivo
+Corretores: Gerenciar imóveis com CRUD completo.
 
-Desenvolver uma **Single Page Application (SPA)** que permita:
+Clientes: Pesquisar imóveis, manifestar interesse, acompanhar imóveis favoritos.
 
-- **Corretores** gerenciarem seus imóveis (CRUD).
-- **Clientes** pesquisarem imóveis e manifestarem interesse.
-- **Visitantes** visualizarem imóveis em destaque sem login.
-- Controle de acesso seguro com **autenticação e autorização por perfil**.
+Visitantes: Explorar imóveis em destaque e criar conta de cliente.
 
----
+Garantir controle de acesso seguro com autenticação e autorização por perfil.
 
-## 📋 Funcionalidades
+📋 Funcionalidades por Perfil
+Perfil	Funcionalidades
+Visitante	Visualizar imóveis em destaque, detalhes de imóvel, criar conta de cliente
+Cliente	Marcar imóveis como "Tenho Interesse", ver lista de interesses, editar perfil
+Corretor	CRUD de imóveis, visualizar clientes interessados
+⚙️ Tecnologias Utilizadas
 
-| Perfil       | Funcionalidades |
-|--------------|-----------------|
-| **Visitante** | Visualizar imóveis em destaque, detalhes de imóvel, criar conta de cliente |
-| **Cliente**   | Marcar imóveis como "Tenho Interesse", ver lista de interesses, editar perfil |
-| **Corretor**  | CRUD de imóveis, visualizar clientes interessados |
+Frontend: Angular 17+ (Standalone Components)
 
----
+Estilização: SCSS com tema verde esmeralda (#009B77)
 
-## ⚙️ Tecnologias Utilizadas
+Formulários: Reactive Forms
 
-- **Frontend**: Angular 17+ (com Standalone Components)
-- **Estilização**: SCSS
-- **Formulários**: Reactive Forms
-- **Comunicação com API**: `HttpClient` + RxJS (`Observable`)
-- **Backend simulado**: [JSON Server](https://github.com/typicode/json-server)
-- **Autenticação**: `localStorage` + `AuthService`
-- **Proteção de rotas**: Guardas de rota (`CanActivateFn`)
-- **Identidade Visual**:  
-  - Verde-esmeralda: `#009B77`  
-  - Cinza-escuro: `#333333`  
-  - Branco: `#FFFFFF`
+Comunicação com API: HttpClient + RxJS (Observable)
 
----
+Backend simulado: JSON Server
 
-## 📁 Estrutura do Projeto
+Autenticação: localStorage + AuthService
 
-```bash
+Proteção de rotas: Guardas (CanActivateFn)
+
+📁 Estrutura do Projeto
 src/
 └── app/
-    ├── core/          
-    │   ├── guards/    
-    │   ├── services/  
-    │   └── models/    
-    ├── views/          
-    │   ├── public/    
-    │   ├── cliente/   
-    │   └── corretor/  
-    └── templates/     
-        ├── components/
-        └── pipes/     
-```
+    ├── core/
+    │   ├── guards/        # Guardas de rota
+    │   ├── services/      # Auth, Imóveis, Interesses
+    │   └── models/        # Interfaces e modelos
+    ├── views/
+    │   ├── public/        # Home, Login
+    │   ├── cliente/       # Funcionalidades do cliente
+    │   └── corretor/      # Funcionalidades do corretor
+    └── templates/
+        ├── components/    # Componentes reutilizáveis (cards, navbar, footer)
+        └── pipes/         # Pipes personalizados
 
----
-
-## Diagrama de Fluxo 
-
-```mermaid
-
+🔄 Fluxo de Navegação
 flowchart TD
-  A[Iniciar Aplicação] --> B{Usuário Logado?}
-  B -- Não --> C[Tela de Login]
-  B -- Sim --> D{Tipo de Usuário?}
-  D -- "cliente" --> E[Redirecionar para /cliente/meus-interesses]
-  D -- "corretor" --> F[Redirecionar para /corretor/dashboard]
-  C --> G[Autenticar com AuthService]
-  G --> H{Credenciais Válidas?}
-  H -- Sim --> D
-  H -- Não --> I[Exibir Erro]
-  I --> C
-```
+    Start[Início] --> CheckLogin{Usuário Logado?}
 
----
+    CheckLogin -- Não --> Login[Tela de Login]
+    CheckLogin -- Sim --> Tipo{Tipo de Usuário?}
 
-## Diagrma de Classes
+    Tipo -- "cliente" --> Cliente[Dashboard Cliente: /cliente/meus-interesses]
+    Tipo -- "corretor" --> Corretor[Dashboard Corretor: /corretor/dashboard]
 
-```mermaid
+    Login --> Autenticar[Autenticar com AuthService]
+    Autenticar --> Credenciais{Credenciais Válidas?}
+    Credenciais -- Sim --> Tipo
+    Credenciais -- Não --> Erro[Exibir Mensagem de Erro]
+    Erro --> Login
 
+🏷️ Diagrama de Classes
 classDiagram
-  class Usuario {
-    +id: number
-    +nome: string
-    +email: string
-    +senha: string
-    +tipo: string
-  }
+    class Usuario {
+        +id: number
+        +nome: string
+        +email: string
+        +senha: string
+        +tipo: string
+    }
 
-  class Imovel {
-    +id: number
-    +titulo: string
-    +corretorId: number
-    +tipo: string
-    +cidade: string
-    +preco: number
-    +descricao: string
-    +imagemUrl: string
-  }
+    class Imovel {
+        +id: number
+        +titulo: string
+        +corretorId: number
+        +tipo: string
+        +cidade: string
+        +preco: number
+        +descricao: string
+        +imagemUrl: string
+    }
 
-  class Interesse {
-    +id: number
-    +clienteId: number
-    +imovelId: number
-  }
+    class Interesse {
+        +id: number
+        +clienteId: number
+        +imovelId: number
+    }
 
-  Usuario "1" -- "0..*" Imovel : publica
-  Usuario "1" -- "0..*" Interesse : manifesta
-  Imovel "1" -- "0..*" Interesse : recebe
-```
+    Usuario "1" -- "0..*" Imovel : publica
+    Usuario "1" -- "0..*" Interesse : manifesta
+    Imovel "1" -- "0..*" Interesse : recebe
 
---- 
-
-## Diagrama de Uso
-
-```mermaid 
-
+🚀 Casos de Uso
 flowchart TD
     subgraph Atores
         V[Visitante]
@@ -155,6 +130,50 @@ flowchart TD
     R --> F8
     R --> F9
 
-    class V,C,R actor
-    class F1,F2,F3,F4,F5,F6,F7,F8,F9 feature
-```
+💻 Instalação e Setup
+1. Instale dependências
+npm install
+
+2. Inicie o JSON Server
+npx json-server --watch db.json --port 3000
+
+3. Inicie o Angular
+ng serve
+
+4. Acesse o projeto
+http://localhost:4200
+
+🎨 Tema e Identidade Visual
+
+Cor Primária (verde esmeralda): #009B77
+
+Cor Secundária (cinza escuro): #333333
+
+Cor de fundo / branco: #FFFFFF
+
+Todos os botões, links e destaques seguem o tema verde esmeralda, mantendo consistência visual em toda a aplicação.
+
+📸 Layout e Telas
+Página Inicial / Home
+
+Dashboard do Cliente
+
+Dashboard do Corretor
+
+Formulário de Login / Cadastro
+
+⚖️ Observações Técnicas
+
+Autenticação: AuthService + localStorage
+
+Guardas de rota: CanActivateFn para proteger páginas por perfil
+
+Interesses em imóveis: Funcionalidade exclusiva para clientes
+
+Responsividade: Layouts compatíveis com desktop e mobile usando Flexbox e Grid
+
+Animações: Cards e botões possuem transições suaves e hover states
+
+📄 License
+
+MIT © Daniel Goes
