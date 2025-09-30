@@ -1,4 +1,6 @@
 # 🏠 Imobiliária Prime Master
+## 👨‍💻 Desenvolveedor 
+### Daniel >Desenvolvimento e implementacao do sistema
 
 > Uma plataforma Angular para gestão de imóveis com autenticação por perfil (cliente e corretor).
 
@@ -37,9 +39,9 @@ Desenvolver uma **Single Page Application (SPA)** que permita:
 - **Autenticação**: `localStorage` + `AuthService`
 - **Proteção de rotas**: Guardas de rota (`CanActivateFn`)
 - **Identidade Visual**:  
-  - Verde-esmeralda: `#009B77`  
-  - Cinza-escuro: `#333333`  
-  - Branco: `#FFFFFF`
+  - 🟢 Verde-esmeralda: `#009B77`  
+  - ⚫ Cinza-escuro: `#333333`  
+  - ⚪ Branco: `#FFFFFF`
 
 ---
 
@@ -60,26 +62,6 @@ src/
         ├── components/
         └── pipes/     
 ```
-
----
-
-## Diagrama de Fluxo 
-
-```mermaid
-
-flowchart TD
-  A[Iniciar Aplicação] --> B{Usuário Logado?}
-  B -- Não --> C[Tela de Login]
-  B -- Sim --> D{Tipo de Usuário?}
-  D -- "cliente" --> E[Redirecionar para /cliente/meus-interesses]
-  D -- "corretor" --> F[Redirecionar para /corretor/dashboard]
-  C --> G[Autenticar com AuthService]
-  G --> H{Credenciais Válidas?}
-  H -- Sim --> D
-  H -- Não --> I[Exibir Erro]
-  I --> C
-```
-
 ---
 
 ## Diagrma de Classes
@@ -118,7 +100,23 @@ classDiagram
 ```
 
 --- 
+## Diagrama de Fluxo 
 
+```mermaid
+
+flowchart TD
+    A[Iniciar Aplicação] --> B{Usuário Logado?}
+    B -- Não --> C[Tela de Login]
+    B -- Sim --> D{Tipo de Usuário?}
+    D -- "cliente" --> E[Redirecionar para /cliente/meus-interesses]
+    D -- "corretor" --> F[Redirecionar para /corretor/dashboard]
+    C --> G[Autenticar com AuthService]
+    G --> H{Credenciais Válidas?}
+    H -- Sim --> D
+    H -- Não --> I[Exibir Erro]
+    I --> C
+```
+---
 ## Diagrama de Uso
 
 ```mermaid 
